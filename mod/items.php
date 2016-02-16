@@ -19,7 +19,8 @@ function update_item(){
 //update the passwords
 global $db;
 //from data: method update on main.html...
-$query = "UPDATE items SET name = '".$_POST['itemname']."' WHERE id = ".$_POST['id']."";
+//$query = "UPDATE items SET name = '".$_POST['itemname']."', description = '".$_POST['itemdes']."', price = '".$_POST['itemprice']."' WHERE id = ".$_POST['id']."";
+$query = "UPDATE items SET description = '".$_POST['itemdes']."' WHERE id = ".$_POST['id']."";
 
 $result = $db->query($query);
 echo json_encode("Updated Item Name!!");
@@ -27,7 +28,7 @@ echo json_encode("Updated Item Name!!");
 
 //1:00:20
 function delete_item(){
-//delete the passwords
+ 
 global $db;
 $query = "DELETE FROM items WHERE id = ".$_POST['id']."";
 $result = $db->query($query);
