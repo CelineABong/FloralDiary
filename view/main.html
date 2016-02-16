@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cel's Storage</title>
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<body>
+    <!-------------------------- ITEM NAME -------------------------->
+        <h1>Item Name</h1>    
+
+            <strong>Update Item Name</strong>
+            <div id="update"></div>
+            <button id="update_itemname">UPDATE NAME</button>
+            <br/><br/>
+
+            <strong>Insert Item Info</strong>
+            <br/>
+            <input id="itemname" type="text" placeholder="Item name"/>
+            <input id="itemdes" type="text" placeholder="Item description"/>
+            <input id="itemprice" type="text" placeholder="Item price"/>
+            <button id="submititem">Store</button>
+
+        <br/><br/>
+        <strong>View Items</strong>
+        <div id="all_users"></div>
+
+
+    <!-------------------------- ITEM DESCRIPTION   
+        <h1>Item Description</h1>    
+
+            <strong>Update Item Description</strong>
+            <div id="updatedes"></div>
+            <button id="update_des">UPDATE NAME</button>
+            <br/><br/>
+
+            <strong>Insert Item Name</strong>
+            <br/>
+            <input id="itemdes" type="text" placeholder="Item description"/>
+            <button id="submititemdes">Store</button>
+
+        <br/><br/>
+        <strong>View Item Name</strong>
+        <div id="all_des"></div>-------------------------->
+
+
+
+    <!-------------------------- ITEM PRICE 
+        <h1>Item Price</h1>  
+
+            <strong>Update Item Price</strong>
+            <div id="updateprice"></div>
+            <button id="update_price">UPDATE NAME</button>
+            <br/><br/>
+
+            <strong>Insert Item Name</strong>
+            <br/>
+            <input id="itemprice" type="text" placeholder="Item price"/>
+            <button id="submititemprice">Store</button>
+
+        <br/><br/>
+        <strong>View Item Name</strong>
+        <div id="all_prices"></div>-------------------------->
+
+     
+</body>
+
+<script>
+$(document).ready(function(){
+
+////////////////////////////////////////////////////////////  ITEM NAME   ////////////////////////////////////////////////////////////
+//INSERTING ITEM NAME
+document.getElementById("submititem").onclick = function(){
+	var itemname = document.getElementById("itemname").value;
+    var itemdes = document.getElementById("itemdes").value;
+    var itemprice = document.getElementById("itemprice").value;
+    
+	$.ajax({
+		url: "../cont/items_c.php",
+		dataType:"html",
+		data: {
+				method: "insert",
+				itemname:itemname,
+                itemdes:itemdes,
+                itemprice:itemprice
+				},
+				type: "POST",
+				success: function(resp){
+					alert("YES");
+                    location.reload();
+				}
+	});
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//VIEWING ITEMS
+	$.ajax({
+		url: "../cont/items_c.php",
+		dataType:"json",
+		data: {
+				method: "view",
+				
+				},
+				type: "POST",
+				success: function(resp){
+					console.log(resp);
+                    
+                    for(var i = 0; i < resp.length; i++){
+					var pass_div = document.createElement("div");
+                    pass_div.style.border = '4px solid black';
+					pass_div.innerHTML = "<br/> Item Name </br>" + resp[i].name + " <br/><br/> Description <br/>" +  resp[i].description +                                          " <br/> <br/> Price <br/>" + resp[i].price
+					document.getElementById("all_users").appendChild(pass_div);
+					
+					//HTML5 DATA!! we put the database id into the div
+					pass_div.dataset.id = resp[i].id;
+					
+					//onclick this div, updates
+					pass_div.onclick = function(){
+					
+					var pass_input = document.createElement("input");
+					pass_input.id = "itemname";
+					pass_input.value = this.innerHTML;
+					document.getElementById("update").innerHTML="";
+					document.getElementById("update").appendChild(pass_input);
+					document.getElementById("update_itemname").dataset.passid = this.dataset.id;
+					
+					editDiv = this;
+					//document.getElementById("update_but").dataset.curDiv = this;
+
+					}
+					
+					var pass_del = document.createElement("button");
+					pass_del.dataset.id = resp[i].id;
+					pass_del.innerHTML = "Delete";
+					document.getElementById("all_users").appendChild(pass_del);
+					pass_del.onclick = function(){
+					 var pass_id = this.dataset.id;
+					 
+					 $.ajax({
+					 	url: "../cont/items_c.php",
+						dataType: "json",
+						type: "POST",
+						data:{
+							method: "delete",
+							id:pass_id
+						}, 
+						success: function(resp){
+								alert("DELETED!");
+								location.reload();
+								//editDiv.parentNode.removeChild(editDiv);
+								//this.parentNode.removeChild(this);
+						}
+					 });
+					}
+				}
+                    
+				} //success close
+	});
+    
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+//UPDATE ITEM NAME
+document.getElementById("update_itemname").onclick = function() {
+ 
+var cur_button = this;
+var item_id = this.dataset.passid;
+						$.ajax({
+							url: "../cont/items_c.php",
+							dataType: "json",
+							data: {
+								method:"update",
+								id: item_id,
+								itemname: document.getElementById("itemname").value
+							},
+							type: "POST",
+							success:function(resp){
+								alert("UPDATED!!");
+								editDiv.innerHTML = document.getElementById("itemname").value
+							}
+						}); //ajax close
+} //update_but onclick close
+    
+
+
+//};
+}); //script function close
+
+    
+</script>
+
+</html>

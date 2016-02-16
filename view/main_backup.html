@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cel's Storage</title>
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<body>
+    
+<!-------------------------- ITEM NAME -------------------------->
+<h1>Item Name</h1>    
+<input id="itemname" type="text" placeholder="Item name"/>
+<button id="submititem">Store</button>
+
+<br/><br/>
+<strong>View Item Name</strong>
+<div id="all_users"></div>
+
+<br/><br/>
+<strong>Update Item Name</strong>
+<div id="update"></div>
+<button id="update_itemname">UPDATE NAME</button>
+<br/><br/>
+    
+<!-------------------------- ITEM DESCRIPTION -------------------------->    
+<h1>Item Description</h1>    
+<input id="itemdes" type="text" placeholder="Item Description"/>
+<button id="submititem2">Store</button>
+    
+<br/><br/>
+<strong>View Item Description</strong>
+<div id="all_users2"></div>
+
+<br/><br/>
+<strong>Update Item Description</strong>
+<div id="update2"></div>
+<button id="update_itemdes">UPDATE NAME</button>
+<br/><br/>
+    
+    
+<!-------------------------- ITEM PRICE -------------------------->
+<h1>Item Price</h1>    
+<input id="itemprice" type="text" placeholder="Item Price"/>
+<button id="submititem3">Store</button>
+<br/><br/>
+<strong>View Item Price</strong>
+<div id="all_users3"></div>
+
+<br/><br/>
+<strong>Update Item Price</strong>
+<div id="update3"></div>
+<button id="update_itemprice">UPDATE NAME</button>
+<br/><br/>
+    
+    
+<!--    
+<div id="update"></div>
+<button id="update_itemname">UPDATE NAME</button>
+<br/><br/>
+    
+<input id="itemname" type="text" placeholder="Item name"/>
+<button id="submititem">Store</button>
+<div id="all_users"></div>
+    
+<input id="username" type="text" placeholder="Username"/>
+<button id="submituser">Store</button>
+<div id="all_users"></div>
+    
+</br>
+    
+<input id="password" type="password" placeholder="Password"/>
+<button id="submit">Store</button>
+
+
+<div id="all_passwords"></div>
+
+</br>
+
+<input id="image" type="text" placeholder="Image URL"/>
+<button id="submitimg">Store</button>
+<div id="all_images"></div>    -->
+    
+</body>
+
+<script>
+$(document).ready(function(){
+
+//INSERTING USERNAMES
+document.getElementById("submituser").onclick = function(){
+	var username = document.getElementById("username").value;
+	$.ajax({
+		url: "../cont/username_c.php",
+		dataType:"html",
+		data: {
+				method: "insert",
+				username:username
+				},
+				type: "POST",
+				success: function(resp){
+					alert("YES");
+                    location.reload();
+				}
+	});
+}
+
+//VIEWING USERNAMES
+//document.getElementById("viewuser").onclick = function(){
+	//var password = document.getElementById("password").value;
+	$.ajax({
+		url: "../cont/username_c.php",
+		dataType:"json",
+		data: {
+				method: "view",
+				
+				},
+				type: "POST",
+				success: function(resp){
+					console.log(resp);
+                    
+                    for(var i = 0; i < resp.length; i++){
+					var pass_div = document.createElement("div");
+					pass_div.innerHTML = resp[i].username;
+					document.getElementById("all_users").appendChild(pass_div);
+					
+					//HTML5 DATA!! we put the database id into the div
+					pass_div.dataset.id = resp[i].id;
+					
+					//onclick this div, updates
+					pass_div.onclick = function(){
+					
+					var pass_input = document.createElement("input");
+					pass_input.id = "user_input";
+					pass_input.value = this.innerHTML;
+					document.getElementById("update").innerHTML="";
+					document.getElementById("update").appendChild(pass_input);
+					document.getElementById("update_but").dataset.passid = this.dataset.id;
+					
+					editDiv = this;
+					//document.getElementById("update_but").dataset.curDiv = this;
+
+					}
+					
+					var pass_del = document.createElement("button");
+					pass_del.dataset.id = resp[i].id;
+					pass_del.innerHTML = "Delete";
+					document.getElementById("all_users").appendChild(pass_del);
+					pass_del.onclick = function(){
+					 var pass_id = this.dataset.id;
+					 
+					 $.ajax({
+					 	url: "../cont/username_c.php",
+						dataType: "json",
+						type: "POST",
+						data:{
+							method: "delete",
+							id:pass_id
+						}, 
+						success: function(resp){
+								alert("DELETED!");
+								location.reload();
+								//editDiv.parentNode.removeChild(editDiv);
+								//this.parentNode.removeChild(this);
+						}
+					 });
+					}
+				}
+                    
+				} //success close
+	});
+//}
+
+var editDiv = null;
+    
+  /*  
+document.getElementById("update_but").onclick = function() {
+    
+//UPDATE the password when ONCLICK
+var cur_button = this;
+var pass_id = this.dataset.passid;
+						$.ajax({
+							url: "../cont/password_c.php",
+							dataType: "json",
+							data: {
+								method:"update",
+								id: pass_id,
+								password: document.getElementById("pass_input").value
+							},
+							type: "POST",
+							success:function(resp){
+								alert("UPDATED!!");
+								editDiv.innerHTML = document.getElementById("pass_input").value
+							}
+						}); //ajax close
+} //update_but onclick close */
+
+//INSERTING PASSWORDS
+document.getElementById("submit").onclick = function(){
+	var password = document.getElementById("password").value;
+	$.ajax({
+		url: "../cont/password_c.php",
+		//url: "../mod/password.php",
+		dataType:"html",
+		data: {
+				method: "insert",
+				password:password
+				},
+				type: "POST",
+				success: function(resp){
+					alert("YES");
+					location.reload();
+				}
+	});
+}
+
+//VIEWING PASSWORDS
+//document.getElementById("view").onclick = function(){
+	//var password = document.getElementById("password").value;
+	$.ajax({
+		url: "../cont/password_c.php",
+		//url: "../mod/password.php",
+		dataType:"json",
+		data: {
+				method: "view",
+				
+				},
+				type: "POST",
+				success: function(resp){
+					console.log(resp);
+					
+					//loop through the passwords in the DB
+					for(var i = 0; i < resp.length; i++){
+					var pass_div = document.createElement("div");
+					pass_div.innerHTML = resp[i].password;
+					document.getElementById("all_passwords").appendChild(pass_div);
+					
+					//HTML5 DATA!! we put the database id into the div
+					pass_div.dataset.id = resp[i].id;
+					
+					//onclick this div, updates
+					pass_div.onclick = function(){
+					
+					var pass_input = document.createElement("input");
+					pass_input.id = "pass_input";
+					pass_input.value = this.innerHTML;
+					document.getElementById("update").innerHTML="";
+					document.getElementById("update").appendChild(pass_input);
+					document.getElementById("update_but").dataset.passid = this.dataset.id;
+					
+					editDiv = this;
+					//document.getElementById("update_but").dataset.curDiv = this;
+
+					}
+					
+					var pass_del = document.createElement("button");
+					pass_del.dataset.id = resp[i].id;
+					pass_del.innerHTML = "Delete";
+					document.getElementById("all_passwords").appendChild(pass_del);
+					pass_del.onclick = function(){
+					 var pass_id = this.dataset.id;
+					 
+					 $.ajax({
+					 	url: "../cont/password_c.php",
+						dataType: "json",
+						type: "POST",
+						data:{
+							method: "delete",
+							id:pass_id
+						}, 
+						success: function(resp){
+								alert("DELETED!");
+								location.reload();
+								//editDiv.parentNode.removeChild(editDiv);
+								//this.parentNode.removeChild(this);
+						}
+					 });
+					}
+				}
+			} //view pass success close
+	});
+    
+    
+//INSERTING IMAGES
+document.getElementById("submitimg").onclick = function(){
+	var image = document.getElementById("image").value;
+	$.ajax({
+		url: "../cont/image_c.php",
+		//url: "../mod/password.php",
+		dataType:"html",
+		data: {
+				method: "insert",
+				image: image, //this is from the variable name
+				},
+				type: "POST",
+				success: function(resp){
+					alert("IMAGE INSERTED");
+					location.reload();
+				}
+	});
+}//insert img close
+
+
+//VIEWING IMAGES
+//document.getElementById("view").onclick = function(){
+	//var password = document.getElementById("password").value;
+	$.ajax({
+		url: "../cont/image_c.php",
+		dataType:"json",
+		data: {
+				method: "view",
+				
+				},
+				type: "POST",
+				success: function(resp){
+					console.log(resp);
+					
+					//loop through the passwords in the DB
+					for(var i = 0; i < resp.length; i++){
+					var pass_div = document.createElement("div");
+                    
+					pass_div.innerHTML = "<img src = ' " + resp[i].image + "' />";
+					document.getElementById("all_images").appendChild(pass_div);
+					
+					//HTML5 DATA!! we put the database id into the div
+					pass_div.dataset.id = resp[i].id;
+					
+					//onclick this div, updates
+					pass_div.onclick = function(){
+					
+					var pass_input = document.createElement("input");
+					pass_input.id = "img_input";
+					pass_input.value = this.innerHTML;
+					document.getElementById("update").innerHTML="";
+					document.getElementById("update").appendChild(pass_input);
+					document.getElementById("update_but").dataset.passid = this.dataset.id;
+					
+					editDiv = this;
+					//document.getElementById("update_but").dataset.curDiv = this;
+
+					}
+					
+					var pass_del = document.createElement("button");
+					pass_del.dataset.id = resp[i].id;
+					pass_del.innerHTML = "Delete";
+					document.getElementById("all_images").appendChild(pass_del);
+					pass_del.onclick = function(){
+					 var pass_id = this.dataset.id;
+					 
+					 $.ajax({
+					 	url: "../cont/image_c.php",
+						dataType: "json",
+						type: "POST",
+						data:{
+							method: "delete",
+							id:pass_id
+						}, 
+						success: function(resp){
+								alert("DELETED!");
+								location.reload();
+								//editDiv.parentNode.removeChild(editDiv);
+								//this.parentNode.removeChild(this);
+						}
+					 });
+					}
+				}
+			} //view pass success close
+	});
+    
+    
+//INSERTING ITEM NAME
+document.getElementById("submititem").onclick = function(){
+	var itemname = document.getElementById("itemname").value;
+	$.ajax({
+		url: "../cont/items_c.php",
+		dataType:"html",
+		data: {
+				method: "insert",
+				itemname:itemname
+				},
+				type: "POST",
+				success: function(resp){
+					alert("YES");
+                    location.reload();
+				}
+	});
+}
+
+
+////////////////////////////////////////////////////////////
+
+
+//VIEWING ITEMS
+	$.ajax({
+		url: "../cont/items_c.php",
+		dataType:"json",
+		data: {
+				method: "view",
+				
+				},
+				type: "POST",
+				success: function(resp){
+					console.log(resp);
+                    
+                    for(var i = 0; i < resp.length; i++){
+					var pass_div = document.createElement("div");
+					pass_div.innerHTML = resp[i].name;
+					document.getElementById("all_users").appendChild(pass_div);
+					
+					//HTML5 DATA!! we put the database id into the div
+					pass_div.dataset.id = resp[i].id;
+					
+					//onclick this div, updates
+					pass_div.onclick = function(){
+					
+					var pass_input = document.createElement("input");
+					pass_input.id = "itemname";
+					pass_input.value = this.innerHTML;
+					document.getElementById("update").innerHTML="";
+					document.getElementById("update").appendChild(pass_input);
+					document.getElementById("update_itemname").dataset.passid = this.dataset.id;
+					
+					editDiv = this;
+					//document.getElementById("update_but").dataset.curDiv = this;
+
+					}
+					
+					var pass_del = document.createElement("button");
+					pass_del.dataset.id = resp[i].id;
+					pass_del.innerHTML = "Delete";
+					document.getElementById("all_users").appendChild(pass_del);
+					pass_del.onclick = function(){
+					 var pass_id = this.dataset.id;
+					 
+					 $.ajax({
+					 	url: "../cont/items_c.php",
+						dataType: "json",
+						type: "POST",
+						data:{
+							method: "delete",
+							id:pass_id
+						}, 
+						success: function(resp){
+								alert("DELETED!");
+								location.reload();
+								//editDiv.parentNode.removeChild(editDiv);
+								//this.parentNode.removeChild(this);
+						}
+					 });
+					}
+				}
+                    
+				} //success close
+	});
+    
+    
+//UPDATE ITEM NAME
+document.getElementById("update_itemname").onclick = function() {
+ 
+var cur_button = this;
+var item_id = this.dataset.passid;
+						$.ajax({
+							url: "../cont/items_c.php",
+							dataType: "json",
+							data: {
+								method:"update",
+								id: item_id,
+								itemname: document.getElementById("itemname").value
+							},
+							type: "POST",
+							success:function(resp){
+								alert("UPDATED!!");
+								editDiv.innerHTML = document.getElementById("itemname").value
+							}
+						}); //ajax close
+} //update_but onclick close
+    
+
+//};
+}); //script function close
+
+    
+</script>
+
+</html>
