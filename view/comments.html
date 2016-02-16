@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+    <title>Users stuff</title>        
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <body>
+        <input type = "text" id="username" placeholder="Username"/>
+        <input type = "password" id="password" placeholder="Password"/>
+        <button id="sub">Login</button>
+        
+        <input type = "text" id="comment" placeholder="Type message here"/>
+        <button id="msg_sub">Submit Message</button>
+    </body>
+    
+    <script>
+    $(document).ready(function(){
+        var user_id = -1;
+        document.getElementById("sub").onclick = function(){
+            
+        
+    //connect and insert
+        $.ajax({
+            url: "../cont/user.php",
+            type: "post",
+            dataType:"json",
+            data: {
+                    method: "login",
+                    username: document.getElementById("username").value,
+                    password: document.getElementById("password").value
+                
+            },
+            
+            success: function(resp){
+                alert("Logged in!");    
+                console.log(resp);
+                user_id = 1;
+               // user_id = resp[0].id;
+            }
+            
+            });
+        }
+        
+        //image insert
+        document.getElementById("msg_sub").onclick = function(){
+            //ajax to the image controller
+            $.ajax({
+                url: "../cont/comment_c.php",
+                type: "post",
+                dataType: "html",
+                data: {
+                    method: "insert",
+                    comment: document.getElementById("comment").value,
+                    user_id: user_id
+                },
+                success:function(resp){
+                    alert('MESSAGE SENT');
+                    console.log(user_id);
+                }
+            });
+            
+        }
+    });
+    
+    
+    </script>
+    
+    
+</html>
