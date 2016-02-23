@@ -15,3 +15,12 @@ body {
 footer {
     margin: 50px 0;
 }
+
+.nav1{
+    color:aliceblue;
+}
+
+.topnav{
+    margin: 1%;
+    float:right;
+}
