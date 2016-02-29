@@ -12,12 +12,12 @@
 <input type='text' id='password' placeholder='password' />
 <button id='sub'>Login</button>
 
-<input type='text' id='message' placeholder='Type da msg' />
+<!--<input type='text' id='message' placeholder='Type da msg' />
 <button id='msg_sub'>Submit Message</button>
 
 
 
- <!--       <div>
+        <div>
             <span id='{{myid}}'>{{hi}}</span>
             <div ng-repeat="blah in msgs">
                 <span>{{blah.username}}</span> : 
@@ -108,13 +108,15 @@
                 },
                 success:function(resp){
                     alert(resp[0].id);
+                    alert(resp[0].name);
                     console.log(resp);
                     user_id = resp[0].id;
+                    username = resp[0].name;
                 }
             });
         }
 
-        document.getElementById("msg_sub").onclick = function(){
+   /*     document.getElementById("msg_sub").onclick = function(){
              $.ajax({
                 url:"controller/message.php",
                 type:"post",
@@ -132,25 +134,25 @@
                 }
             });
 
-        }
-    });
+        } */
  
-    
-    
-$(document).ready(function(){
 
 ////////////////////////////////////////////////////////////  ITEM NAME   ////////////////////////////////////////////////////////////
 //INSERTING ITEM NAME
+
 document.getElementById("submititem").onclick = function(){
 	var itemname = document.getElementById("itemname").value;
     var itemdes = document.getElementById("itemdes").value;
     var itemprice = document.getElementById("itemprice").value;
-    
+   
+        
 	$.ajax({
 		url: "../cont/items_c.php",
 		dataType:"html",
 		data: {
 				method: "insert",
+                user_id: user_id,
+                username: username,
 				itemname:itemname,
                 itemdes:itemdes,
                 itemprice:itemprice
@@ -185,12 +187,16 @@ document.getElementById("submititem").onclick = function(){
                     var namespan = document.createElement("h4");
                     var desspan = document.createElement("h4");
                     var pricespan = document.createElement("h4");
-                    pass_div.style.border = '4px solid black';                        
+                    var username = document.createElement("h4");
+                        
+                    pass_div.style.border = '4px solid black';      
+                    username.innerHTML =  resp[i].username; 
                     namespan.innerHTML =  resp[i].name; 
                     desspan.innerHTML =  resp[i].description;
                     pricespan.innerHTML =  resp[i].price;
 				  //pass_div.innerHTML = "<br/> Item Name </br>" + resp[i].name + " <br/><br/> Description <br/>" +  resp[i].description + "<br/> <br/> Price <br/>" + resp[i].price
 					document.getElementById("all_users").appendChild(pass_div);
+                    pass_div.appendChild(username);
 					pass_div.appendChild(namespan);
                     pass_div.appendChild(desspan);
                     pass_div.appendChild(pricespan);

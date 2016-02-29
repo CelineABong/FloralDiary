@@ -3,9 +3,10 @@ include("connection.php");
 
 function insert_item(){
 	global $db;
-	$query = "INSERT INTO items(name, description, price) VALUES ('".$_POST['itemname']."','".$_POST['itemdes']."','".$_POST['itemprice']."')";
+	$query = "INSERT INTO items(name, description, price, user_id, username) VALUES ('".$_POST['itemname']."','".$_POST['itemdes']."','".$_POST['itemprice']."',  '".$_POST['user_id']."','".$_POST['username']."')";
 	$result = $db -> query($query);
 }
+ 
 
 function view_items(){
 	global $db;
