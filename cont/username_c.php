@@ -20,5 +20,9 @@ if($_POST['method'] == "update"){
 if($_POST['method'] == "delete"){
 	delete_username();
 }
+
+if($_POST['method'] == "login"){
+    get_user_by_username_password();
+}
 //Celine
 ?>

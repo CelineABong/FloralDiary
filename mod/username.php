@@ -33,4 +33,14 @@ $query = "DELETE FROM usernames WHERE id = ".$_POST['id']."";
 $result = $db->query($query);
 echo json_encode("DELETED USERNAME!");
 }
+
+
+function get_user_by_username_password(){
+    // grab user based on the username and password
+    global $db;
+    $query = "SELECT id FROM users WHERE name = '".$_POST['username']."' AND password = '".$_POST['password']."'";
+    
+    $result = $db->query($query);
+    echo json_encode($result->fetchAll());
+}
 ?>
