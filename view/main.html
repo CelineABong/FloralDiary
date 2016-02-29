@@ -33,6 +33,7 @@
     <!-------------------------- ITEM NAME -------------------------->
         <h1>Items</h1>    
 
+        <div id="insertitems" style="display:none">
             <strong>Update Item Name</strong>
             <div id="update"></div>
             <button id="update_itemname">UPDATE NAME</button>
@@ -44,8 +45,10 @@
             <input id="itemdes" type="text" placeholder="Item description"/>
             <input id="itemprice" type="text" placeholder="Item price"/>
             <button id="submititem">Store</button>
-
-        <br/><br/>
+            <br/><br/>
+        </div>
+    
+        
         <strong>View Items</strong>
         <div id="all_users"></div>
 
@@ -112,6 +115,7 @@
                     console.log(resp);
                     user_id = resp[0].id;
                     username = resp[0].name;
+                    document.getElementById("insertitems").style.display = "block";
                 }
             });
         }
