@@ -7,6 +7,7 @@
 
     if($_POST['method'] == "updateUser"){
         update_name();
+        update_usernameitems();
         update_pass();
         update_add();
         update_phone();

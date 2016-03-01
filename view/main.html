@@ -9,7 +9,7 @@
 <body>
 
     <!-------------------------- Register Form -------------------------->
-    <h3>User Registrate</h3>
+    <h3>User Registration</h3>
     <span>Username:</span>
     <input type='text' id='name' placeholder='username' /> <br/>
     <span>Password:</span>
@@ -49,25 +49,7 @@
     <span>Email:</span>
     <input type='text' id='udemail' placeholder='email' /> <br/>
     <button id='save'>Save</button>
-
-    
-    <!--<input type='text' id='message' placeholder='Type da msg' />
-    <button id='msg_sub'>Submit Message</button>
-
-
-
-        <div>
-            <span id='{{myid}}'>{{hi}}</span>
-            <div ng-repeat="blah in msgs">
-                <span>{{blah.username}}</span> : 
-                <span>{{blah.message}}</span> - 
-                <span>{{blah.likeNum}} <img height='25' src="http://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/102011/like_icon.png?itok=nkurUMlZ" /></span>
-                <button ng-click="clickFunc(blah.msg_id)">Like!</button>
-            </div>
-        </div>  -->
-    
-    
-    
+ 
     
     <!-------------------------- ITEM NAME -------------------------->
         <h1>Items</h1>    
@@ -91,44 +73,7 @@
         <strong>View Items</strong>
         <div id="all_users"></div>
 
-
-    <!-------------------------- ITEM DESCRIPTION   
-        <h1>Item Description</h1>    
-
-            <strong>Update Item Description</strong>
-            <div id="updatedes"></div>
-            <button id="update_des">UPDATE NAME</button>
-            <br/><br/>
-
-            <strong>Insert Item Name</strong>
-            <br/>
-            <input id="itemdes" type="text" placeholder="Item description"/>
-            <button id="submititemdes">Store</button>
-
-        <br/><br/>
-        <strong>View Item Name</strong>
-        <div id="all_des"></div> -------------------------->
-
-
-
-    <!-------------------------- ITEM PRICE 
-        <h1>Item Price</h1>  
-
-            <strong>Update Item Price</strong>
-            <div id="updateprice"></div>
-            <button id="update_price">UPDATE NAME</button>
-            <br/><br/>
-
-            <strong>Insert Item Name</strong>
-            <br/>
-            <input id="itemprice" type="text" placeholder="Item price"/>
-            <button id="submititemprice">Store</button>
-
-        <br/><br/>
-        <strong>View Item Name</strong>
-        <div id="all_prices"></div> -------------------------->
-
-     
+ 
 </body>
 
 <script>
@@ -202,54 +147,9 @@
                 }
             });
         }
-        
-        
-        /*
-        document.getElementById("save").onclick = function() {
- 
-                $.ajax({
-                    url: "../cont/user.php",
-                    dataType: "json",
-                    data: {
-                        method:"updateUser",
-                        id: id,
-                        name: document.getElementById("name").value,
-                        password: document.getElementById("pass").value,
-                        address: document.getElementById("add").value,
-                        phone: document.getElementById("phone").value,
-                        email: document.getElementById("email").value,
-                    },
-                    type: "POST",
-                    success:function(resp){
-                        alert("UPDATED!!");
-                    }
-                }); //ajax close
-        }
-        */
-        
-
-   /*     document.getElementById("msg_sub").onclick = function(){
-             $.ajax({
-                url:"controller/message.php",
-                type:"post",
-                dataType:"json",
-                data: {
-                    method:"insert",
-                    user_id: user_id,
-                    msg: document.getElementById("message").value
-                },
-                success:function(resp){
-                    alert("Logged in!");
-                    console.log(resp);
-                    user_id = resp[0].id;
-                    sessionStorage.id = resp[0].id;
-                }
-            });
-
-        } */
  
 
-////////////////////////////////////////////////////////////  ITEM NAME   ////////////////////////////////////////////////////////////
+///////////////////////  ITEM NAME   ////////////////////////////
 //INSERTING ITEM NAME
 
 document.getElementById("submititem").onclick = function(){
@@ -278,17 +178,16 @@ document.getElementById("submititem").onclick = function(){
 }
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 //VIEWING ITEMS
 	$.ajax({
 		url: "../cont/items_c.php",
 		dataType:"json",
 		data: {
-				method: "view",
-				
+				method: "view",				
 				},
+        
 				type: "POST",
 				success: function(resp){
 					console.log(resp);
@@ -321,21 +220,7 @@ document.getElementById("submititem").onclick = function(){
                         
                         
 ////////////////////UPDATE ITEM INFO ONCLICK
-				/*	namespan.onclick = function(){
-					
-					var pass_input = document.createElement("input");
-					pass_input.id = "itemname";
-					pass_input.value = this.innerHTML;
-					document.getElementById("update").innerHTML="";
-					document.getElementById("update").appendChild(pass_input);
-					document.getElementById("update_itemname").dataset.passid = this.dataset.id;
-					
-					editDiv = this;
-					//document.getElementById("update_but").dataset.curDiv = this;
-
-					} */
-                                        
-                    //					
+ 			
                     desspan.onclick = function(){
 					
 					var pass_input = document.createElement("input");
@@ -346,24 +231,10 @@ document.getElementById("submititem").onclick = function(){
 					document.getElementById("update_itemname").dataset.passid = this.dataset.id;
 					
 					editDiv = this;
-					//document.getElementById("update_but").dataset.curDiv = this;
-
+					 
 					}
                     
-                    //					
-                 /*   pricespan.onclick = function(){
-					
-					var pass_input = document.createElement("input");
-					pass_input.id = "itemprice";
-					pass_input.value = this.innerHTML;
-					document.getElementById("update").innerHTML="";
-					document.getElementById("update").appendChild(pass_input);
-					document.getElementById("update_itemname").dataset.passid = this.dataset.id;
-					
-					editDiv = this;
-					//document.getElementById("update_but").dataset.curDiv = this;
-
-					} */
+             
         
 					
                     

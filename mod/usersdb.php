@@ -26,6 +26,15 @@
         echo json_encode("Updated Username!!");
     }
 
+    function update_usernameitems(){
+        global $db;
+        
+        $query = "UPDATE items SET username = '".$_POST['name']."' WHERE user_id = ".$_POST['id']."";
+
+        $result = $db->query($query);
+        echo json_encode("Updated Username in Items!!");
+    }
+
     function update_pass(){
         global $db;
         
