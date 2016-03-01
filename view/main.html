@@ -7,13 +7,33 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
 <body>
-    
-<input type='text' id='username' placeholder='username' />
-<input type='text' id='password' placeholder='password' />
-<button id='sub'>Login</button>
 
-<!--<input type='text' id='message' placeholder='Type da msg' />
-<button id='msg_sub'>Submit Message</button>
+    <!-------------------------- Register Form -------------------------->
+    <span>Username:</span>
+    <input type='text' id='name' placeholder='username' /> <br/>
+    <span>Password:</span>
+    <input type='text' id='pass' placeholder='password' /> <br/>
+    <span>Address:</span>
+    <input type='text' id='add' placeholder='address' /> <br/>
+    <span>Phone:</span>
+    <input type='text' id='phone' placeholder='phone' /> <br/>
+    <span>Email:</span>
+    <input type='text' id='email' placeholder='email' /> <br/>
+    <button id='reg'>Register</button>
+    
+    <br/>
+    <br/>
+    
+    <!-------------------------- Login Form -------------------------->
+    <span>Username:</span>
+    <input type='text' id='username' placeholder='username' /> <br/>
+    <span>Password:</span>
+    <input type='text' id='password' placeholder='password' /> <br/>
+    <button id='sub'>Login</button>
+
+    
+    <!--<input type='text' id='message' placeholder='Type da msg' />
+    <button id='msg_sub'>Submit Message</button>
 
 
 
@@ -68,7 +88,7 @@
 
         <br/><br/>
         <strong>View Item Name</strong>
-        <div id="all_des"></div>-------------------------->
+        <div id="all_des"></div> -------------------------->
 
 
 
@@ -87,7 +107,7 @@
 
         <br/><br/>
         <strong>View Item Name</strong>
-        <div id="all_prices"></div>-------------------------->
+        <div id="all_prices"></div> -------------------------->
 
      
 </body>
@@ -97,6 +117,29 @@
  
     $(document).ready(function(){
         var user_id = -1;
+        
+        
+        document.getElementById("reg").onclick = function(){
+                
+                $.ajax({
+                    url:"../cont/user.php",
+                    type:"post",
+                    dataType:"html",
+                    data: {
+                        method:"insert",
+                        name: document.getElementById("name").value,
+                        password: document.getElementById("pass").value,
+                        address: document.getElementById("add").value,
+                        phone: document.getElementById("phone").value,
+                        email: document.getElementById("email").value,
+                    },
+                    success:function(resp){
+                        console.log(resp);
+                    }
+                });
+            };
+        
+        
         //modify our files a little bit later
         document.getElementById("sub").onclick = function(){
             //connect and insert
@@ -164,7 +207,7 @@ document.getElementById("submititem").onclick = function(){
 				type: "POST",
 				success: function(resp){
 					alert("YES");
-                    location.reload();
+                   // location.reload();
 				}
 	});
 }
