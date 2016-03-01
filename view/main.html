@@ -152,6 +152,21 @@
                     username = resp[0].name;
                     document.getElementById("insertitems").style.display = "block";
                     
+                    for(var i = 0; i < resp.length; i++){
+                        var unameInp = document.getElementById("udname");
+                        var passInp = document.getElementById("udpass");
+                        var addInp = document.getElementById("udadd");
+                        var phoneInp = document.getElementById("udphone");
+                        var emailInp = document.getElementById("udemail");
+                        
+                        
+                        unameInp.value = resp[i].name;
+                        passInp.value = resp[i].password;
+                        addInp.value = resp[i].address;
+                        phoneInp.value = resp[i].phone;
+                        emailInp.value = resp[i].email;     
+				    }
+                    
                     document.getElementById("save").onclick = function() {
  
                         $.ajax({
