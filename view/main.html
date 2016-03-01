@@ -9,6 +9,7 @@
 <body>
 
     <!-------------------------- Register Form -------------------------->
+    <h3>User Registrate</h3>
     <span>Username:</span>
     <input type='text' id='name' placeholder='username' /> <br/>
     <span>Password:</span>
@@ -25,11 +26,29 @@
     <br/>
     
     <!-------------------------- Login Form -------------------------->
+    <h3>User Login</h3>
     <span>Username:</span>
     <input type='text' id='username' placeholder='username' /> <br/>
     <span>Password:</span>
     <input type='text' id='password' placeholder='password' /> <br/>
     <button id='sub'>Login</button>
+    
+    <br/>
+    <br/>
+    
+    <!-------------------------- Update Form -------------------------->
+    <h3>User Profile Update</h3>
+    <span>Username:</span>
+    <input type='text' id='udname' placeholder='username' /> <br/>
+    <span>Password:</span>
+    <input type='text' id='udpass' placeholder='password' /> <br/>
+    <span>Address:</span>
+    <input type='text' id='udadd' placeholder='address' /> <br/>
+    <span>Phone:</span>
+    <input type='text' id='udphone' placeholder='phone' /> <br/>
+    <span>Email:</span>
+    <input type='text' id='udemail' placeholder='email' /> <br/>
+    <button id='save'>Save</button>
 
     
     <!--<input type='text' id='message' placeholder='Type da msg' />
@@ -159,9 +178,55 @@
                     user_id = resp[0].id;
                     username = resp[0].name;
                     document.getElementById("insertitems").style.display = "block";
+                    
+                    document.getElementById("save").onclick = function() {
+ 
+                        $.ajax({
+                            url: "../cont/user.php",
+                            dataType: "json",
+                            data: {
+                                method:"updateUser",
+                                id: user_id,
+                                name: document.getElementById("udname").value,
+                                password: document.getElementById("udpass").value,
+                                address: document.getElementById("udadd").value,
+                                phone: document.getElementById("udphone").value,
+                                email: document.getElementById("udemail").value,
+                            },
+                            type: "POST",
+                            success:function(resp){
+                                alert("UPDATED!!");
+                            }
+                        }); //ajax close
+                    }
                 }
             });
         }
+        
+        
+        /*
+        document.getElementById("save").onclick = function() {
+ 
+                $.ajax({
+                    url: "../cont/user.php",
+                    dataType: "json",
+                    data: {
+                        method:"updateUser",
+                        id: id,
+                        name: document.getElementById("name").value,
+                        password: document.getElementById("pass").value,
+                        address: document.getElementById("add").value,
+                        phone: document.getElementById("phone").value,
+                        email: document.getElementById("email").value,
+                    },
+                    type: "POST",
+                    success:function(resp){
+                        alert("UPDATED!!");
+                    }
+                }); //ajax close
+        }
+        */
+        
 
    /*     document.getElementById("msg_sub").onclick = function(){
              $.ajax({

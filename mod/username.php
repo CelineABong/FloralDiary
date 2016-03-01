@@ -1,12 +1,6 @@
 <?php 
 include("connection.php");
 
-function insert_username(){
-	global $db;
-	$query = "INSERT INTO usernames(username) VALUES ('".$_POST['username']."')";
-	$result = $db -> query($query);
-}
-
 function view_usernames(){
 	global $db;
 	$query = "SELECT * FROM usernames";
