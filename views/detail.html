@@ -13,11 +13,11 @@
 </div>
 <div ng-controller="userCtrl" ng-init="userInit()">
     <div ng-show="status == 'login'" ng-controller="commCtrl">
-        <textarea style="resize: none" placeholder="Leave your comment..." ng-model="comm">
+        <textarea style="resize: none" placeholder="Write a comment..." ng-model="comm">
         </textarea>
         <button ng-click="postComm(comm,userid)">Post</button>
     </div>
     <div style="color: darkred" ng-show="status == 'notLogin'">
-        Please <a href="#/home">Login</a> to leave a comment..
+        Please <a href="#/home">Login</a> to write a comment.
     </div>
 </div>
