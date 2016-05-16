@@ -1,0 +1,47 @@
+<a href="#/home">Back</a>
+<h1>Image Upload</h1>
+Title: <input id="imgTitle" /><br/><br/>
+Description: <textarea style="resize: none" id="imgDes"></textarea><br/><br/>
+image: <input type="file" id="imgFile"/><br/><br/>
+<button id="upload">Upload</button>
+
+<script>
+$("document").ready(function(){
+    $("#upload").click(
+        function(){
+            var img = document.getElementById("imgFile").files[0];
+            console.log(img);
+            var formData = new FormData();
+            formData.append("file",img, img.name);
+            formData.append("username",JSON.parse(localStorage.getItem("userInfo")).username);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST","model/imgUpload.php",true);
+            xhr.onload = function(){
+                if(xhr.status == 200){
+                    path = JSON.parse(xhr.responseText).path;
+                    console.log(path);
+                    $.ajax({
+                        url: "controller/image.php",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            method: "insert",
+                            title: $("#imgTitle").val(),
+                            description: $("#imgDes").val(),
+                            uploader: JSON.parse(localStorage.getItem("userInfo")).username,
+                            path: path
+                        },
+                        success: function(res){
+                            console.log(res);
+                            if(res==1){
+                                location.href="#/home";
+                            }
+                        }
+                    })
+                }
+            }
+            xhr.send(formData);
+        }
+    )
+});
+</script>

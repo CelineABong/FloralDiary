@@ -1,0 +1,83 @@
+<style>
+    #container {
+    text-align: center;        
+    }    
+</style>
+
+
+<div id="container">
+    
+<h1>Floral Diary</h1>
+<div ng-controller="userCtrl" ng-init="userInit()">
+    <div ng-show="status == 'notLogin'">
+    
+        Username: <input ng-model="su"/> <br/>
+        Password: <input ng-model="sp" type="password"/> <br/>
+        <button ng-click="login(su,sp);">Login</button><br/> <br/>
+        <button ng-click="goSignUp()">New? Sign Up Here!</button>
+    </div>
+    <div ng-show="status == 'login'">
+        Hello, {{username}}!<br/>
+        
+        <h1>Sell something!</h1>
+        Title <br/> <input id="imgTitle" /><br/><br/>
+        Description <br/> <textarea style="resize: none" id="imgDes"></textarea><br/><br/>
+        Image <br/> <input type="file" id="imgFile"/><br/><br/>
+        <button id="upload">Post</button> <br/><br/>
+        
+        <a href="#/userP"><button>User Data</button></a>
+        <button ng-click="logout()">Log Out</button>
+        
+    </div>
+</div>
+<div ng-controller="imgCtrl" ng-init="getAll()">
+    <div style="margin-top: 24px; width: auto; border: 0.5px solid" ng-repeat="image in images">
+        <h3>{{image.title}}</h3>
+        <img width="50%" ng-src="{{image.path}}" />
+        <p>Posted by {{image.username}}</p>
+        <a href="#/detail/{{image.id}}">See More</a>
+    </div>
+</div>
+
+</div>
+
+<script>
+$("document").ready(function(){
+    $("#upload").click(
+        function(){
+            var img = document.getElementById("imgFile").files[0];
+            console.log(img);
+            var formData = new FormData();
+            formData.append("file",img, img.name);
+            formData.append("username",JSON.parse(localStorage.getItem("userInfo")).username);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST","model/imgUpload.php",true);
+            xhr.onload = function(){
+                if(xhr.status == 200){
+                    path = JSON.parse(xhr.responseText).path;
+                    console.log(path);
+                    $.ajax({
+                        url: "controller/image.php",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            method: "insert",
+                            title: $("#imgTitle").val(),
+                            description: $("#imgDes").val(),
+                            uploader: JSON.parse(localStorage.getItem("userInfo")).username,
+                            path: path
+                        },
+                        success: function(res){
+                            console.log(res);
+                            if(res==1){
+                                location.reload();
+                            }
+                        }
+                    })
+                }
+            }
+            xhr.send(formData);
+        }
+    )
+});
+</script>

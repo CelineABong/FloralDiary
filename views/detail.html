@@ -1,0 +1,23 @@
+<a href="#/home"><button>Back</button></a>
+<div ng-controller="imgCtrl" ng-init="getImage()">
+    <h1>{{imgD.title}}</h1>
+    <img ng-src="{{imgD.path}}" width="100%;"/>
+    <p>Description: {{imgD.description}}</p>
+    <p>Post by: {{imgD.username}}</p>
+</div>
+<div ng-controller="commCtrl" ng-init="getImgComm()">
+    <div ng-repeat="comm in comms">
+        <p style="color: steelblue">{{comm.username}}: </p>
+        <p>{{comm.text}}</p>
+    </div>
+</div>
+<div ng-controller="userCtrl" ng-init="userInit()">
+    <div ng-show="status == 'login'" ng-controller="commCtrl">
+        <textarea style="resize: none" placeholder="Leave your comment..." ng-model="comm">
+        </textarea>
+        <button ng-click="postComm(comm,userid)">Post</button>
+    </div>
+    <div style="color: darkred" ng-show="status == 'notLogin'">
+        Please <a href="#/home">Login</a> to leave a comment..
+    </div>
+</div>
