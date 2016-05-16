@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 16, 2016 at 02:50 AM
+-- Generation Time: May 16, 2016 at 04:01 AM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -13,6 +13,48 @@ SET time_zone = "+00:00";
 --
 -- Database: `floraldiary`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment`
+--
+
+CREATE TABLE `comment` (
+  `userid` int(11) NOT NULL,
+  `imageid` int(11) NOT NULL,
+  `text` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`userid`, `imageid`, `text`) VALUES
+(16, 33, 'Very cool! I wanna buy!');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `image`
+--
+
+CREATE TABLE `image` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `userid` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `image`
+--
+
+INSERT INTO `image` (`id`, `title`, `description`, `path`, `userid`) VALUES
+(32, 'asf', 'asdfasdf', './model/image/celinebong/1463354052.jpg', 12),
+(33, 'Screenshot', 'Print screen', './model/image/mumu/1463355964.jpg', 17),
+(34, 'Hey', 'asfdasfasf', './model/image/mumuu/1463358874.jpg', 17);
 
 -- --------------------------------------------------------
 
@@ -46,6 +88,20 @@ INSERT INTO `users` (`id`, `username`, `password`, `address`, `phone`, `email`) 
 --
 
 --
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD KEY `userid` (`userid`),
+  ADD KEY `imageid` (`imageid`);
+
+--
+-- Indexes for table `image`
+--
+ALTER TABLE `image`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userid` (`userid`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -56,7 +112,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `image`
+--
+ALTER TABLE `image`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`imageid`) REFERENCES `image` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `image`
+--
+ALTER TABLE `image`
+  ADD CONSTRAINT `image_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
