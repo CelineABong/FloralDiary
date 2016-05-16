@@ -4,12 +4,13 @@
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: cover;
+     
     }
     
     
     #container {
-    margin: auto;
-    text-align: center;        
+        margin: auto;
+        text-align: center;        
     }    
 </style>
 
@@ -38,7 +39,7 @@
         <button ng-click="logout()">Log Out</button>
         
         <div ng-controller="imgCtrl" ng-init="getAll()">
-            <div style="margin: auto; margin-top: 3%; width: 80%; background-color: rgba(255,255,255,0.8)" ng-repeat="image in images">
+            <div style="padding: 1%; margin: auto; margin-top: 3%; width: 80%; background-color: rgba(255,255,255,0.8); -webkit-box-shadow: 0px 9px 20px -7px rgba(0,0,0,0.3); -moz-box-shadow: 0px 9px 20px -7px rgba(0,0,0,0.3); box-shadow: 0px 9px 20px -7px rgba(0,0,0,0.3);" ng-repeat="image in images">
                 <h3>{{image.title}}</h3>
                 <img width="50%" ng-src="{{image.path}}" />
                 <p>Posted by {{image.username}}</p>
