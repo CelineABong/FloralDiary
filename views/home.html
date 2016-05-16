@@ -1,5 +1,6 @@
 <style>
     #container {
+    margin: auto;
     text-align: center;        
     }    
 </style>
@@ -20,8 +21,8 @@
         Hello, {{username}}!<br/>
         
         <h1>Sell something!</h1>
-        Title <br/> <input id="imgTitle" /><br/><br/>
-        Description <br/> <textarea style="resize: none" id="imgDes"></textarea><br/><br/>
+        Title <br/> <input id="imgTitle" placeholder="Write title here..."/><br/><br/>
+        Description <br/> <textarea style="resize: none" id="imgDes" placeholder="Write description here..."></textarea><br/><br/>
         Image <br/> <input type="file" id="imgFile"/><br/><br/>
         <button id="upload">Post</button> <br/><br/>
         
@@ -31,11 +32,11 @@
     </div>
 </div>
 <div ng-controller="imgCtrl" ng-init="getAll()">
-    <div style="margin-top: 24px; width: auto; border: 0.5px solid" ng-repeat="image in images">
+    <div style="margin: auto; margin-top: 3%; width: 80%; border: 0.5px solid" ng-repeat="image in images">
         <h3>{{image.title}}</h3>
         <img width="50%" ng-src="{{image.path}}" />
         <p>Posted by {{image.username}}</p>
-        <a href="#/detail/{{image.id}}">See More</a>
+        <p><a href="#/detail/{{image.id}}">See More</a></p>
     </div>
 </div>
 
