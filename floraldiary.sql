@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 16, 2016 at 02:45 AM
+-- Generation Time: May 16, 2016 at 02:50 AM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -34,13 +34,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `address`, `phone`, `email`) VALUES
-(2, '123', '123', '', 0, ''),
-(3, 'Alina', '12345', '', 0, ''),
-(4, '12345', '56789', '', 0, ''),
-(5, '123', '123', '', 0, ''),
-(6, '123', '123', '', 0, ''),
-(7, '12345', '12345', '', 0, ''),
-(8, '111', '222', '', 0, ''),
 (12, 'celinebong', '123', '', 0, ''),
 (13, 'zi', 'zi', '', 0, ''),
 (14, 'mimi', 'mimi', 'mimi', 234, 'mimi@mi.com'),
