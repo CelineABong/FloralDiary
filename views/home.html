@@ -21,8 +21,8 @@
 <div ng-controller="userCtrl" ng-init="userInit()">
     <div ng-show="status == 'notLogin'">
     
-        Username: <input ng-model="su"/> <br/>
-        Password: <input ng-model="sp" type="password"/> <br/>
+        <input ng-model="su" placeholder="Username"/> <br/>
+        <input ng-model="sp" type="password" placeholder="Password"/> <br/>
         <button ng-click="login(su,sp);">Login</button><br/> <br/>
         <button ng-click="goSignUp()">New? Sign Up Here!</button>
     </div>
