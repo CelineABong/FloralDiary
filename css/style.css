@@ -1,0 +1,62 @@
+body {
+    background-image: url("image/background2.png");
+    background-attachment:inherit;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Puritan', sans-serif;
+}
+
+button {
+    font-family: 'Puritan', sans-serif;
+    font-weight: 400;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+span {
+    font-family: 'Puritan', sans-serif;
+    font-weight: 400;
+    font-size: 1.3em;
+}
+
+.userInput {
+    margin-bottom: 10px;
+}
+    
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
+@import url(https://fonts.googleapis.com/css?family=Puritan:400,700);
+
+#container {
+    margin: auto;
+    margin-top: 100px;
+    text-align: center;
+    text-align: center;
+}
+
+#container h1 {
+    font-family: 'Indie Flower', cursive; 
+/*    color: #0066cc;*/
+    font-size: 3.5em;
+} 
+
+#container h2 {
+    font-size: 2em;
+} 
+
+.showAllImage {
+    padding: 1%; 
+    margin: auto; 
+    margin-top: 3%; 
+    width: 80%; 
+    background-color: rgba(255,255,255,0.8); 
+    -webkit-box-shadow: 0px 9px 20px -7px rgba(0,0,0,0.3); 
+    -moz-box-shadow: 0px 9px 20px -7px rgba(0,0,0,0.3); 
+    box-shadow: 0px 9px 20px -7px rgba(0,0,0,0.3);
+}
+
+.fdButton {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000000;
+    border: 1px solid rgba(200, 200, 200, 0.5);
+    margin-top: 20px;
+}
