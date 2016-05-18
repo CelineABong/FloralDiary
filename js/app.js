@@ -49,7 +49,7 @@ var myApp = angular.module("app",['ngRoute'])
             $scope.status = "login";
             $scope.userid = JSON.parse($window.localStorage.getItem("userInfo")).userid;
             $scope.username = JSON.parse($window.localStorage.getItem("userInfo")).username;
-            console.log("nima");
+            console.log("Testing");
         }else{
             $scope.status = "notLogin";
         }
@@ -227,6 +227,24 @@ var myApp = angular.module("app",['ngRoute'])
                     console.log("hta");
                 }
             });
+    };
+    
+    //LIKES
+        $scope.clickFunc = function(id){
+        $.ajax({
+            url:"controller/image.php",
+            type:"POST",
+            dataType:"html",
+            data:{
+                method:"like",
+                image_id: $routeParams.imgId,                
+                user_id: JSON.parse($window.localStorage.getItem("userInfo")).userid
+                //user_id: sessionStorage.getItem("userid")
+            },
+            success:function(resp){
+                alert("Liked!");
+            }
+        });
     };
 })
 .controller("commCtrl", function($scope, $routeParams, $window){

@@ -27,4 +27,8 @@
         delect_images();
     }
 
+    if($_POST['method'] == "like"){
+        insert_like();
+    }
+
 ?>

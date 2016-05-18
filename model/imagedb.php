@@ -91,5 +91,19 @@
         
     }
 
+//LIKES
+    function insert_like(){
+        global $db;
+        $query = "INSERT INTO likes (image_id, user_id) VALUES ('".$_POST['image_id']."', ".$_POST['user_id'].")";
+        $result = $db->query($query);
+    }
+
+    function get_likes(){
+        global $db;
+        $query = "SELECT * FROM likes";
+        $result = $db->query($query);
+        echo json_encode($result->fetchAll());
+    }
+
 
 ?>
