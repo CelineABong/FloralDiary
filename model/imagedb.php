@@ -30,6 +30,18 @@
         
     }
     
+/*
+function get_messages(){
+    global $db;
+    $query = "SELECT messages.id AS msg_id, messages.message, users.username, messages.user_id, 
+                (SELECT COUNT(*) FROM likes WHERE likes.message_id = msg_id) AS likeNum
+                FROM messages
+                LEFT JOIN users ON users.id = messages.user_id";
+    $result = $db->query($query);
+    echo json_encode($result->fetchAll());
+}
+*/
+
     function get_user_images(){
         global $db;
         
@@ -46,7 +58,9 @@
     function get_images(){
         global $db;
         
-        $query = "SELECT image.id, image.title, image.path, image.description, users.username FROM image INNER JOIN users ON image.userid = users.id WHERE image.id = :id";
+        $query = "SELECT image.id AS img_id, image.title, image.path, image.description, users.username, (SELECT COUNT(*) FROM likes WHERE likes.image_id = img_id) AS likeNum
+        FROM image
+        INNER JOIN users ON image.userid = users.id WHERE image.id = :id";
         $stmt = $db->prepare($query);
         $stmt->execute(array(
             ':id' => $_POST['id']   
