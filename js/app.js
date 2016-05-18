@@ -243,10 +243,13 @@ var myApp = angular.module("app",['ngRoute'])
             },
             success:function(resp){
                 alert("Liked!");
+                location.reload(); 
             }
         });
-    };
+    };        
 })
+
+
 .controller("commCtrl", function($scope, $routeParams, $window){
     
     $scope.getUserComm = function(){
