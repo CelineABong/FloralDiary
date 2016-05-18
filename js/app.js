@@ -14,9 +14,9 @@ var myApp = angular.module("app",['ngRoute'])
                 controller: "imgCtrl"
             }
         ).when(
-            "/userP",
+            "/userd",
             {
-                templateUrl: "views/userPannel.html",
+                templateUrl: "views/userdata.html",
                 controller: "userCtrl"
             }
         ).when(
