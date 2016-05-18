@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 16, 2016 at 04:01 AM
+-- Generation Time: May 18, 2016 at 08:01 AM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -31,7 +31,8 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`userid`, `imageid`, `text`) VALUES
-(16, 33, 'Very cool! I wanna buy!');
+(16, 33, 'Very cool! I wanna buy!'),
+(16, 35, 'Very nice photo');
 
 -- --------------------------------------------------------
 
@@ -45,7 +46,7 @@ CREATE TABLE `image` (
   `description` varchar(255) NOT NULL,
   `path` varchar(255) NOT NULL,
   `userid` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `image`
@@ -54,7 +55,28 @@ CREATE TABLE `image` (
 INSERT INTO `image` (`id`, `title`, `description`, `path`, `userid`) VALUES
 (32, 'asf', 'asdfasdf', './model/image/celinebong/1463354052.jpg', 12),
 (33, 'Screenshot', 'Print screen', './model/image/mumu/1463355964.jpg', 17),
-(34, 'Hey', 'asfdasfasf', './model/image/mumuu/1463358874.jpg', 17);
+(34, 'Hey', 'asfdasfasf', './model/image/mumuu/1463358874.jpg', 17),
+(35, 'sdafasdf', 'asdfasf', './model/image/fifi/1463543692.jpg', 16);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `user_id` int(11) NOT NULL,
+  `image_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`user_id`, `image_id`) VALUES
+(16, 32),
+(16, 34),
+(16, 35);
 
 -- --------------------------------------------------------
 
@@ -102,6 +124,13 @@ ALTER TABLE `image`
   ADD KEY `userid` (`userid`);
 
 --
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `image_id` (`image_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -115,7 +144,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -137,3 +166,10 @@ ALTER TABLE `comment`
 --
 ALTER TABLE `image`
   ADD CONSTRAINT `image_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`image_id`) REFERENCES `image` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
