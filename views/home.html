@@ -14,7 +14,8 @@
         
         <h1>Sell something!</h1>
         Title <br/> <input id="imgTitle" placeholder="Write title here..."/><br/><br/>
-        Description <br/> <textarea style="resize: none" id="imgDes" placeholder="Write description here..."></textarea><br/><br/>
+        Description: <br/> <textarea style="resize: none" id="imgDes" placeholder="Description here"></textarea><br/>
+        Price: <br/> <input id="imgPrice" placeholder="Price of item"></textarea><br/><br/>
         Image <br/> <input type="file" id="imgFile"/><br/><br/>
         <button id="upload">Post</button> <br/><br/>
         
@@ -59,6 +60,7 @@ $("document").ready(function(){
                             method: "insert",
                             title: $("#imgTitle").val(),
                             description: $("#imgDes").val(),
+                            price: $("#imgPrice").val(),
                             uploader: JSON.parse(localStorage.getItem("userInfo")).username,
                             path: path
                         },

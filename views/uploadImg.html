@@ -1,7 +1,8 @@
 <a href="#/home">Back</a>
 <h1>Image Upload</h1>
 Title: <input id="imgTitle" /><br/><br/>
-Description: <textarea style="resize: none" id="imgDes"></textarea><br/><br/>
+Description: <textarea style="resize: none" id="imgDes"></textarea><br/>
+Price: <textarea style="resize: none" id="imgPrice"></textarea><br/><br/>
 image: <input type="file" id="imgFile"/><br/><br/>
 <button id="upload">Upload</button>
 
@@ -28,6 +29,7 @@ $("document").ready(function(){
                             method: "insert",
                             title: $("#imgTitle").val(),
                             description: $("#imgDes").val(),
+                            price: $("#imgPrice").val(),
                             uploader: JSON.parse(localStorage.getItem("userInfo")).username,
                             path: path
                         },

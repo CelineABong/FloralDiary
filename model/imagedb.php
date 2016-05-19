@@ -4,10 +4,11 @@
     function insert_image(){
         global $db;
 
-        $query = "INSERT INTO image (title, path, description, userid) VALUES (:title, :path, :description, (SELECT id FROM users WHERE username = :username))";
+        $query = "INSERT INTO image (title, path, description, price, userid) VALUES (:title, :path, :description, :price, (SELECT id FROM users WHERE username = :username))";
         $stmt = $db->prepare($query);
         $stmt->execute(array(
             ':path' => $_POST['path'],
+            ':price' => $_POST['price'],
             ':description' => $_POST['description'],
             ':username' => $_POST['uploader'],
             ':title' => $_POST['title'],
