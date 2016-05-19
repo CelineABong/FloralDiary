@@ -59,7 +59,7 @@ function get_messages(){
     function get_images(){
         global $db;
         
-        $query = "SELECT image.id AS img_id, image.title, image.path, image.description, users.username, (SELECT COUNT(*) FROM likes WHERE likes.image_id = img_id) AS likeNum
+        $query = "SELECT image.id AS img_id, image.title, image.path, image.description, image.price, users.username, (SELECT COUNT(*) FROM likes WHERE likes.image_id = img_id) AS likeNum
         FROM image
         INNER JOIN users ON image.userid = users.id WHERE image.id = :id";
         $stmt = $db->prepare($query);
