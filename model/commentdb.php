@@ -41,7 +41,7 @@
         echo json_encode($result);
     }
 
-    function delect_comment(){
+    function delete_comment(){
         global $db;
         
         $query = "DELETE FROM comment WHERE userid = :uid AND imageid = :imgid AND text = :text";

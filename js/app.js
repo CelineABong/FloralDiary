@@ -319,7 +319,7 @@ var myApp = angular.module("app",['ngRoute'])
                 url: "controller/comment.php",
                 type: "POST",
                 data: {
-                       method: "delectComment",
+                       method: "deleteComment",
                        imageid: i,
                        userid: JSON.parse($window.localStorage.getItem("userInfo")).userid,
                        text: c

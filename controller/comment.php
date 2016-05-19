@@ -18,8 +18,8 @@
         get_userComment();
     }
 
-    if($_POST['method'] == "delectComment"){
-        delect_comment();
+    if($_POST['method'] == "deleteComment"){
+        delete_comment();
     }
 
 
