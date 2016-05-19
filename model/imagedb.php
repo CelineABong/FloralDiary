@@ -22,7 +22,7 @@
     function get_all_images(){
         global $db;
         
-        $query = "SELECT image.id, image.title, image.path, image.description, users.username FROM image INNER JOIN users ON image.userid = users.id ORDER BY id DESC";
+        $query = "SELECT image.id, image.title, image.path, image.description,image.price, users.username FROM image INNER JOIN users ON image.userid = users.id ORDER BY id DESC";
         $stmt = $db->prepare($query);
         $stmt->execute();
         $imageDetail = $stmt->fetchAll(PDO::FETCH_ASSOC);
