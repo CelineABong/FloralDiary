@@ -22,5 +22,8 @@
         delete_comment();
     }
 
+    if($_POST['method'] == "updateComment"){
+        update_comment();
+    }
 
 ?>

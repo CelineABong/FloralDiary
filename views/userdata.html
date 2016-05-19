@@ -22,12 +22,16 @@
         <tr>
             <th>Item Title</th>
             <th>Item Id</th>
-            <th>Comment</th>        
+            <th>Comment</th>    
+            <th>Update</th>    
+            <th>Delete</th>    
+            
         </tr>
         <tr ng-repeat="comm in userComms">
             <td>{{comm.title}}</td>
             <td>{{comm.imageid}}</td>
             <td><input type="text" value="{{comm.text}}"></td>
+            <td><button ng-click="delCom(comm.imageid, comm.text)">Update</button></td>
             <td><button ng-click="delCom(comm.imageid, comm.text)">Delete</button></td>
         </tr>
         
