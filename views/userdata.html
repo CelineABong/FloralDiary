@@ -6,7 +6,8 @@
         <h1>{{image.title}}</h1>
         <br/>
         <img width="50%" ng-src="{{image.path}}" /><br/>
-        <p>{{image.description}}</p><br/>
+        <p>{{image.description}}</p> 
+        <p>${{image.price}}</p><br/>
         <a href="#/detail/{{image.id}}">View Post</a><br/><br/>
         
         Update Title <input ng-model="newtitle"/><button ng-click="upImg(newtitle, 'title', image.id)">Update</button><br/><br/>
